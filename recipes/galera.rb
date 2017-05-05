@@ -181,7 +181,7 @@ galera_options['wsrep_slave_threads'] = if node['mariadb']['galera'].attribute?(
 
 ipaddress = ''
 iface = if node['mariadb']['galera']['wsrep_node_address_interface'].empty?
-          node['network']['interfaces'].reject { |_k, v| v['flags'].include?('LOOPBACK') }.keys.first
+          node['network']['interfaces'].reject { |_k, v| v['flags'] != nil && v['flags'].include?('LOOPBACK') }.keys.first
         else
           node['mariadb']['galera']['wsrep_node_address_interface']
         end
